@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creating Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Creating New Company</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name(size=30) }}<br><br>
+        {{ form.description.label }} {{ form.description(size=60) }}<br><br>
+        {{ form.employees_count.label }} {{ form.employees_count() }}<br><br>
+        {{ form.location.label }} {{ form.location(size=30) }}<br><br>
+        {{ form.submit() }}
+    </form>
+</body>
+</html>
