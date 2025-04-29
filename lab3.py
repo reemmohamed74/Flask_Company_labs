@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
 
-# Define the models
+
 
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +33,7 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
 
-# Register route
+
 @app.route('/api/auth/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -47,7 +47,6 @@ def register():
 
     return jsonify({"message": "User registered successfully"}), 201
 
-# Login route
 @app.route('/api/auth/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -59,7 +58,6 @@ def login():
 
     return jsonify({"message": "Invalid credentials"}), 401
 
-# CRUD Operations for Company
 
 # Create a new company (Only authenticated users)
 @app.route('/api/companies', methods=['POST'])
@@ -80,7 +78,6 @@ def create_company():
 
     return jsonify({"message": "Company created successfully", "company": new_company.name}), 201
 
-# Get all companies
 @app.route('/api/companies', methods=['GET'])
 def get_companies():
     companies = Company.query.all()
@@ -90,7 +87,7 @@ def get_companies():
 
     return jsonify(result), 200
 
-# Get a single company by ID
+
 @app.route('/api/companies/<int:id>', methods=['GET'])
 def get_company(id):
     company = Company.query.get(id)
@@ -107,7 +104,7 @@ def get_company(id):
 
     return jsonify(result), 200
 
-# Update company details (Only authenticated users)
+
 @app.route('/api/companies/<int:id>', methods=['PUT'])
 @jwt_required()
 def update_company(id):
@@ -117,7 +114,7 @@ def update_company(id):
     if not company:
         return jsonify({"message": "Company not found"}), 404
 
-    # Optionally: check if the current user is the owner of the company (not implemented here)
+  
 
     company.name = data.get('name', company.name)
     company.description = data.get('description', company.description)
@@ -128,7 +125,6 @@ def update_company(id):
 
     return jsonify({"message": "Company updated successfully"}), 200
 
-# Delete a company (Only authenticated users)
 @app.route('/api/companies/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_company(id):
