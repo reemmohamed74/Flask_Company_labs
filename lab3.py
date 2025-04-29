@@ -59,7 +59,6 @@ def login():
     return jsonify({"message": "Invalid credentials"}), 401
 
 
-# Create a new company (Only authenticated users)
 @app.route('/api/companies', methods=['POST'])
 @jwt_required()
 def create_company():
